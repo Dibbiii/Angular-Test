@@ -1,0 +1,9 @@
+<h1>{{count()}}</h1>
+
+@if (count() < 0) {
+<p>Counter is less than 0</p>
+} @else if (count() > 0) {
+<p>Counter is greater than 0</p>
+} @else {
+<p>Counter is 0</p>
+}

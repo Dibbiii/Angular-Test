@@ -1,0 +1,23 @@
+<h1>{{title()}}</h1>
+<button (click)="onClickPlus()" class="bg-green-500">Plus</button>
+<button (click)="onClickMinus()" class="bg-red-500">Minus</button>
+
+<app-counter-display-component [count]="counter" />
+
+<div class="bg-amber-950 text-white p-5">
+  <app-currency-converter [initialPrice]="totalPrice()" (priceChange)= />
+  <p>Total Price: <b>{{totalPrice()}}</b></p>
+  <p>Product Bought: <b>{{productBought()}}</b></p>
+</div>
+
+<div class="flex flex-wrap gap-2">
+  @for (item of listItems; track item.id) {
+  <app-product-component
+    [name]="item.name"
+    [price]="item.price"
+    (buyProduct)="handleBuyProduct($event)"
+  />
+  }
+</div>
+
+<app-bought-list [BoughtItems]="boughtItems()" />
