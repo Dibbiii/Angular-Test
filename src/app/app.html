@@ -1,23 +1,8 @@
 <h1>{{title()}}</h1>
-<button (click)="onClickPlus()" class="bg-green-500">Plus</button>
-<button (click)="onClickMinus()" class="bg-red-500">Minus</button>
 
-<app-counter-display-component [count]="counter" />
+<nav class="flex gap-1 p-0.5">
+  <a routerLink="/" class="p-0.5 bg-green-200">Home</a>
+  <a routerLink="/cart" class="p-0.5 bg-gray-400">Carrello</a>
+</nav>
 
-<div class="bg-amber-950 text-white p-5">
-  <app-currency-converter />
-</div>
-
-<app-search-bar (searchEvent)="onSearchUpdated($event)" />
-
-<div class="flex flex-wrap gap-2">
-  @for (item of filteredProducts(); track item.id) {
-  <app-product-component
-    [id]="item.id"
-    [name]="item.name"
-    [price]="item.price"
-  />
-  }
-</div>
-
-<app-bought-list />
+<router-outlet></router-outlet>
