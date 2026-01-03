@@ -1,4 +1,5 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
+import { CartService } from '../../Services/cart-service';
 
 @Component({
   selector: 'app-product-component',
@@ -9,13 +10,17 @@ import { Component, input, output } from '@angular/core';
 export class ProductComponent {
   name = input.required<string>();
   price = input.required<number>();
+  id = input.required<number>();
+  cartService = inject(CartService);
 
   buyProduct = output<{ price: number; name: string }>();
 
   handleBuyProduct() {
-    this.buyProduct.emit({
-      price: this.price(),
+    this.cartService.addToCart({
+      id: this.id(),
       name: this.name(),
+      price: this.price(),
     });
+    
   }
 }

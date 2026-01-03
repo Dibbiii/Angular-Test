@@ -1,5 +1,6 @@
-import { Component, computed, signal, input } from '@angular/core';
+import { Component, computed, signal, input, inject } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { CartService } from '../../Services/cart-service';
 
 @Component({
   selector: 'app-currency-converter',
@@ -9,7 +10,8 @@ import { DecimalPipe } from '@angular/common';
   styleUrl: './currency-converter.css',
 })
 export class CurrencyConverter {
-  initialPrice = input.required<number>();
+  cartService = inject(CartService);
+  initialPrice = this.cartService.priceBeforeConversion;
 
   selectedCurrency = signal('EUR');
 

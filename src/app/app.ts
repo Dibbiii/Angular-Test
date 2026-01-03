@@ -1,4 +1,4 @@
-import { Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { BoughtList } from './Components/bought-list/bought-list';
 import { CounterDisplayComponent } from './Components/counter-display-component/counter-display-component';
@@ -6,6 +6,7 @@ import type Product from './product';
 import { ProductComponent } from './Components/product-component/product-component';
 import { CurrencyConverter } from './Components/currency-converter/currency-converter';
 import { SearchBar } from './Components/search-bar/search-bar';
+import { CartService } from './Services/cart-service';
 
 @Component({
   selector: 'app-root',
@@ -24,13 +25,10 @@ import { SearchBar } from './Components/search-bar/search-bar';
 export class App {
   protected readonly title = signal('CIao Alessandro');
   protected counter = 0;
-  protected productBought = signal(0);
-  protected boughtItems = signal<Product[]>([]);
   protected convertedPrice = signal<number>(0);
-  protected priceBeforeConversion = computed(() =>
-    this.boughtItems().reduce((acc, item) => acc + item.price, 0),
-  );
 
+  cartService = inject(CartService);
+  
   protected listItems = signal<Product[]>([
     { id: 1, name: 'Apple', price: 199 },
     { id: 2, name: 'Banana', price: 99 },
@@ -74,16 +72,16 @@ export class App {
   }
 
   handleBuyProduct(product: { price: number; name: string }) {
-    this.productBought.update((value) => value + 1);
+    //this.productBought.update((value) => value + 1);
     // this.totalPrice += product.price;
-    this.boughtItems.update((items) => [
-      ...items,
-      {
-        id: items.length + 1,
-        name: product.name,
-        price: product.price,
-      },
-    ]);
+    //this.boughtItems.update((items) => [
+      //...items,
+      //{
+        //id: items.length + 1,
+        //name: product.name,
+        //price: product.price,
+        //},
+    //]);
   }
 
   onPriceChange(newPrice: number) {

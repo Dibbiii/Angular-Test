@@ -1,5 +1,6 @@
-import { Component, input } from '@angular/core';
-import type Product from '../product';
+import { Component, inject, input } from '@angular/core';
+import type Product from '../../product';
+import { CartService } from '../../Services/cart-service';
 
 @Component({
   selector: 'app-bought-list',
@@ -9,5 +10,6 @@ import type Product from '../product';
   styleUrl: './bought-list.css',
 })
 export class BoughtList {
-  BoughtItems = input.required<Product[]>();
+  cartService = inject(CartService);
+  boughtItems = this.cartService.cartItems;
 }
