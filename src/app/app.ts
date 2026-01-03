@@ -1,15 +1,23 @@
 import { Component, computed, effect, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { BoughtList } from './bought-list/bought-list';
-import { CounterDisplayComponent } from './counter-display-component/counter-display-component';
+import { BoughtList } from './Components/bought-list/bought-list';
+import { CounterDisplayComponent } from './Components/counter-display-component/counter-display-component';
 import type Product from './product';
-import { ProductComponent } from './product-component/product-component';
-import { CurrencyConverter } from './currency-converter/currency-converter';
+import { ProductComponent } from './Components/product-component/product-component';
+import { CurrencyConverter } from './Components/currency-converter/currency-converter';
+import { SearchBar } from './Components/search-bar/search-bar';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CounterDisplayComponent, ProductComponent, BoughtList, CurrencyConverter],
+  imports: [
+    RouterOutlet,
+    CounterDisplayComponent,
+    ProductComponent,
+    BoughtList,
+    CurrencyConverter,
+    SearchBar,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -23,11 +31,29 @@ export class App {
     this.boughtItems().reduce((acc, item) => acc + item.price, 0),
   );
 
-  protected listItems: Product[] = [
+  protected listItems = signal<Product[]>([
     { id: 1, name: 'Apple', price: 199 },
     { id: 2, name: 'Banana', price: 99 },
     { id: 3, name: 'Orange', price: 149 },
-  ];
+  ]);
+
+  // Signal per il testo di ricerca
+  protected searchText = signal('');
+
+  // Lista visualizzata dall'utente -> si aggiorna o se cambia searchText o se cambia listItems
+  protected filteredProducts = computed(() => {
+    const text = this.searchText().toLowerCase();
+    const products = this.listItems();
+
+    if (!text) return products; // Se vuoto, mostra tutto
+
+    return products.filter((p) => p.name.toLowerCase().includes(text));
+  });
+
+  // Metodo chiamato dall'evento della SearchBar
+  onSearchUpdated(text: string) {
+    this.searchText.set(text);
+  }
 
   constructor() {
     effect(() => {

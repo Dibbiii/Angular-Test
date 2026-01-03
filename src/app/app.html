@@ -9,13 +9,15 @@
   <p>Product Bought: <b>{{productBought()}}</b></p>
 </div>
 
+<app-search-bar (searchEvent)="onSearchUpdated($event)" />
+
 <div class="flex flex-wrap gap-2">
-  @for (item of listItems; track item.id) {
-  <app-product-component
-    [name]="item.name"
-    [price]="item.price"
-    (buyProduct)="handleBuyProduct($event)"
-  />
+  @for (item of filteredProducts(); track item.id) {
+    <app-product-component
+      [name]="item.name"
+      [price]="item.price"
+      (buyProduct)="handleBuyProduct($event)"
+    />
   }
 </div>
 
