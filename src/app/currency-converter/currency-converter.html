@@ -1,11 +1,16 @@
-<div class="gap-1.5 flex">
-  <h1>Initial Price: {{initialPrice()}}</h1>
-  <button class="bg-amber-300 border-4 border-black p-1" (click)="onEuroClicked()">Euro</button>
-  <button class="bg-amber-700 border-4 border-black p-1" (click)="onDollaroClicked()">
-    Dollaro
+<div class="converter-box">
+  @for (currency of currencies; track currency) {
+  <button (click)="selectedCurrency.set(currency)" [class.active]="selectedCurrency() === currency">
+    {{ currency }}
   </button>
-  <button class="bg-red-500 border-4 border-black p-1" (click)="onSterlinaClicked()">
-    Sterline
-  </button>
-  <button class="bg-red-900 border-4 border-black p-1" (click)="onPesosClicked()">Pesos</button>
+  }
+
+  <div class="result">
+    <p>Totale Convertito: {{ finalPrice() | number:'1.2-2' }} {{ selectedCurrency() }}</p>
+    <!-- number: È la **DecimalPipe** che formatta i numeri
+         1.2-2 sta per:
+         1: Minimo 1 cifra intera (prima della virgola)
+         2: Minimo 2 decimali (dopo la virgola)
+         2: Massimo 2 decimali (dopo la virgola)-->
+  </div>
 </div>

@@ -19,7 +19,7 @@ export class App {
   protected productBought = signal(0);
   protected boughtItems = signal<Product[]>([]);
   protected convertedPrice = signal<number>(0);
-  protected actualPrice = computed(() =>
+  protected priceBeforeConversion = computed(() =>
     this.boughtItems().reduce((acc, item) => acc + item.price, 0),
   );
 

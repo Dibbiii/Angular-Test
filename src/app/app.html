@@ -5,8 +5,7 @@
 <app-counter-display-component [count]="counter" />
 
 <div class="bg-amber-950 text-white p-5">
-  <app-currency-converter [initialPrice]="actualPrice()" (priceChange)="onPriceChange($event)" />
-  <p>Total Price: <b>{{convertedPrice()}}</b></p>
+  <app-currency-converter [initialPrice]="priceBeforeConversion()" />
   <p>Product Bought: <b>{{productBought()}}</b></p>
 </div>
 
