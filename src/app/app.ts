@@ -70,20 +70,7 @@ export class App {
   handleUpdateCount() {
     this.counter = 0;
   }
-
-  handleBuyProduct(product: { price: number; name: string }) {
-    //this.productBought.update((value) => value + 1);
-    // this.totalPrice += product.price;
-    //this.boughtItems.update((items) => [
-      //...items,
-      //{
-        //id: items.length + 1,
-        //name: product.name,
-        //price: product.price,
-        //},
-    //]);
-  }
-
+  
   onPriceChange(newPrice: number) {
     this.convertedPrice.set(newPrice);
   }

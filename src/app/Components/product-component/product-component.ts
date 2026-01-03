@@ -13,8 +13,6 @@ export class ProductComponent {
   id = input.required<number>();
   cartService = inject(CartService);
 
-  buyProduct = output<{ price: number; name: string }>();
-
   handleBuyProduct() {
     this.cartService.addToCart({
       id: this.id(),
