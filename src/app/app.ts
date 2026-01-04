@@ -25,5 +25,4 @@ import { CartService } from './Services/cart-service';
 })
 export class App {
   protected readonly title = signal('Ciao Alessandra!');
-  
 }

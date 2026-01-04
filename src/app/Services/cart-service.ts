@@ -19,4 +19,8 @@ export class CartService {
   removeFromCart(product: Product) {
     this._cartItems.update(items => items.filter((item) => item.id !== product.id));
   }
+  
+  clearCart(){
+    this._cartItems.set([]);
+  }
 }

@@ -9,7 +9,14 @@
   "projects": {
     "study-app": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "path": "/src/app/Components"
+        },
+        "@schematics/angular:services":{
+          "path": "src/app/Services"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
