@@ -21,7 +21,7 @@
     <div class="mb-4">
       <label class="block font-bold">Indirizzo</label>
       <textarea formControlName="address" class="w-full p-2 border rounded"> </textarea>
-      @if (orderForm.get('address')?.hasError('minlength') && orderForm.get('address')?.touched) {
+      @if (orderForm.get('address')?.hasError('minlength') && orderForm.get('address')?.touched) { <!-- touched diventa true solo quando l'utente clicca dentro il campo e poi clicca fuori -->
       <p class="text-red-500 text-sm">Indirizzo troppo corto (min 10 caratteri)</p>
       }
     </div>

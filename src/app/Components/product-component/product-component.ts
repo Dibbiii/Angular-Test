@@ -8,17 +8,20 @@ import { CartService } from '../../Services/cart-service';
   styleUrl: './product-component.css',
 })
 export class ProductComponent {
-  name = input.required<string>();
+  title = input.required<string>();
   price = input.required<number>();
   id = input.required<number>();
+  image = input.required<string>();
+  description = input.required<string | undefined>();
   cartService = inject(CartService);
 
   handleBuyProduct() {
     this.cartService.addToCart({
       id: this.id(),
-      name: this.name(),
+      title: this.title(),
       price: this.price(),
+      image: this.image(),
+      description: this.description(),
     });
-    
   }
 }

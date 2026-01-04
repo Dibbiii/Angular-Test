@@ -6,6 +6,8 @@ import { ProductComponent } from '../../Components/product-component/product-com
 import { CurrencyConverter } from '../../Components/currency-converter/currency-converter';
 import { SearchBar } from '../../Components/search-bar/search-bar';
 import { BoughtList } from '../bought-list/bought-list';
+import { ProductService } from '../../Services/product-service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home-component',
@@ -19,12 +21,9 @@ export class HomeComponent {
   protected convertedPrice = signal<number>(0);
 
   cartService = inject(CartService);
+  productService = inject(ProductService);
 
-  protected listItems = signal<Product[]>([
-    { id: 1, name: 'Apple', price: 199 },
-    { id: 2, name: 'Banana', price: 99 },
-    { id: 3, name: 'Orange', price: 149 },
-  ]);
+  listItems = toSignal(this.productService.getProducts());
 
   // Signal per il testo di ricerca
   protected searchText = signal('');
@@ -34,9 +33,9 @@ export class HomeComponent {
     const text = this.searchText().toLowerCase();
     const products = this.listItems();
 
-    if (!text) return products; // Se vuoto, mostra tutto
+    if (!products || !text) return products; // Se vuoto, mostra tutto
 
-    return products.filter((p) => p.name.toLowerCase().includes(text));
+    return products.filter((p) => p.title.toLowerCase().includes(text));
   });
 
   // Metodo chiamato dall'evento della SearchBar

@@ -1,5 +1,7 @@
 <div class="bg-amber-300 p-5">
-  <h1>Name: {{name()}}</h1>
+  <img src="{{image()}}" alt="{{title()}}" class="w-16 h-16" />
+  <h1>Title: {{title()}}</h1>
+  <p>Description: {{description()}}</p>
   <h4>Price: {{price()}}</h4>
   <button class="bg-blue-400 p-2" (click)="handleBuyProduct()">Buy Product</button>
 </div>

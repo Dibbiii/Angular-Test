@@ -13,7 +13,7 @@
         "@schematics/angular:component": {
           "path": "/src/app/Components"
         },
-        "@schematics/angular:services":{
+        "@schematics/angular:service":{
           "path": "src/app/Services"
         }
       },

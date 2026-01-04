@@ -12,7 +12,7 @@ export class CheckOut {
   cartService = inject(CartService);
 
   orderForm = new FormGroup({
-    name: new FormControl('', Validators.required),
+    name: new FormControl('', { validators: [Validators.required], nonNullable: true }),
     email: new FormControl('', [Validators.required, Validators.email]),
     address: new FormControl('', [Validators.required, Validators.minLength(10)]),
   });
