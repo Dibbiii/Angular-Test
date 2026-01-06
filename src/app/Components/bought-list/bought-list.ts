@@ -1,10 +1,11 @@
-import { Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../Services/cart-service';
 
 @Component({
   selector: 'app-bought-list',
   imports: [RouterLink],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   templateUrl: './bought-list.html',
   styleUrl: './bought-list.css',

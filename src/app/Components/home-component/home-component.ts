@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { CartService } from '../../Services/cart-service';
 import { CounterDisplayComponent } from '../../Components/counter-display-component/counter-display-component';
 import type Product from '../../product';
@@ -12,6 +12,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-home-component',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [BoughtList, CounterDisplayComponent, ProductComponent, CurrencyConverter, SearchBar],
   templateUrl: './home-component.html',
   styleUrl: './home-component.css',
@@ -23,7 +24,9 @@ export class HomeComponent {
   cartService = inject(CartService);
   productService = inject(ProductService);
 
-  listItems = toSignal(this.productService.getProducts());
+  listItems = toSignal(this.productService.getProducts(), { initialValue: [] }); 
+  //toSignal restituisce undefined finché la chiamata HTTP non finisce
+  // mettendo initialValue[], listItems parte subito come array vuoto [] e non devo gestire undefined nel resto del codice
 
   // Signal per il testo di ricerca
   protected searchText = signal('');

@@ -1,10 +1,11 @@
-import { Component, computed, signal, input, inject } from '@angular/core';
+import { Component, computed, signal, input, inject, ChangeDetectionStrategy } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { CartService } from '../../Services/cart-service';
 
 @Component({
   selector: 'app-currency-converter',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DecimalPipe],
   templateUrl: './currency-converter.html',
   styleUrl: './currency-converter.css',

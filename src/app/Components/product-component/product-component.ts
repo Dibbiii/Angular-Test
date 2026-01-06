@@ -1,8 +1,10 @@
-import { Component, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { CartService } from '../../Services/cart-service';
 
 @Component({
   selector: 'app-product-component',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   templateUrl: './product-component.html',
   styleUrl: './product-component.css',
